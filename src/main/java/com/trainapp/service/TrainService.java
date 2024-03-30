@@ -17,33 +17,35 @@ public class TrainService {
     @Autowired
     private TrainRepository repository;
 
-public void createTrain(TrainRequest train){
-    TrainDetails train_save = TrainDetails.builder()
-    .urlImage(train.getUrlImage())
-    .type(train.getType())
-    .trainName(train.getTrainName()).build();
+    @SuppressWarnings("null")
+    public void createTrain(TrainRequest train) {
+        TrainDetails train_save = TrainDetails.builder()
+                .urlImage(train.getUrlImage())
+                .type(train.getType())
+                .trainName(train.getTrainName()).build();
 
-    repository.save(train_save);
-    log.info("Train Details for: "+ train_save.getId() +" -> saved");
+        repository.save(train_save);
+        log.info("Train Details for: " + train_save.getId() + " -> saved");
 
-}
+    }
 
-public TrainResponse getSpecificTrain(String id){
-    TrainDetails train = repository.findById(id).get();
-    return mapToTrainResponse(train);
-}
+    @SuppressWarnings("null")
+    public TrainResponse getSpecificTrain(String id) {
+        TrainDetails train = repository.findById(id).get();
+        return mapToTrainResponse(train);
+    }
 
-public List<TrainResponse> getAllTrains(){
-    List<TrainDetails> trains = repository.findAll();
-return trains.stream().map(this::mapToTrainResponse).toList();
+    public List<TrainResponse> getAllTrains() {
+        List<TrainDetails> trains = repository.findAll();
+        return trains.stream().map(this::mapToTrainResponse).toList();
 
-}
+    }
 
-private TrainResponse mapToTrainResponse(TrainDetails train){
-    return TrainResponse.builder()
-    .id(train.getId()).urlImage(train.getUrlImage())
-    .type(train.getType())
-    .trainName(train.getTrainName())
-    .build();
-}
+    private TrainResponse mapToTrainResponse(TrainDetails train) {
+        return TrainResponse.builder()
+                .id(train.getId()).urlImage(train.getUrlImage())
+                .type(train.getType())
+                .trainName(train.getTrainName())
+                .build();
+    }
 }

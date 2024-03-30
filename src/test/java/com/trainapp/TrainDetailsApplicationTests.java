@@ -16,6 +16,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trainapp.dto.TrainRequest;
+
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc
@@ -26,8 +27,8 @@ class TrainDetailsApplicationTests {
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:4.4.2");
 
 	@DynamicPropertySource
-	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
-		dynamicPropertyRegistry.add("spring.data.mongodb.uri",mongoDBContainer::getReplicaSetUrl);
+	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry) {
+		dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
 	}
 
 	@Autowired
@@ -36,20 +37,21 @@ class TrainDetailsApplicationTests {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	@SuppressWarnings("null")
 	@Test
 	void shouldCreateTrain() {
 		TrainRequest request = getTrainRequest();
-		try{
-		String request_string = objectMapper.writeValueAsString(request);
-		mockMvc.perform(MockMvcRequestBuilders.post("/train/add_train")
-		.contentType(MediaType.APPLICATION_JSON).content(request_string)).andExpect(status().isCreated());
-		}
-		catch(Exception e){
+		try {
+			String request_string = objectMapper.writeValueAsString(request);
+			mockMvc.perform(MockMvcRequestBuilders.post("/train/add_train")
+					.contentType(MediaType.APPLICATION_JSON).content(request_string)).andExpect(status().isCreated());
+		} catch (Exception e) {
 			System.out.println("Okay");
-		};
+		}
+		;
 	}
 
-	private TrainRequest getTrainRequest(){
+	private TrainRequest getTrainRequest() {
 		return TrainRequest.builder().trainName("Test_Train").build();
 	}
 }

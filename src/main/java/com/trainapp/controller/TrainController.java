@@ -15,38 +15,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
 
 @RestController
 @RequestMapping("/api/train")
 public class TrainController {
 
-@Autowired
-private TrainService trainService;
+    @Autowired
+    private TrainService trainService;
 
-@PostMapping("/add_train")
-@ResponseStatus(HttpStatus.ACCEPTED)
-public void createTrain(@RequestBody TrainRequest trainRequest){
-    trainService.createTrain(trainRequest);
-}
+    @PostMapping("/add_train")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void createTrain(@RequestBody TrainRequest trainRequest) {
+        trainService.createTrain(trainRequest);
+    }
 
-@GetMapping
-@ResponseStatus(HttpStatus.OK)
-public List<TrainResponse> getAllTrains() {
-    return trainService.getAllTrains();
-}
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<TrainResponse> getAllTrains() {
+        return trainService.getAllTrains();
+    }
 
-@GetMapping("/{Id}")
-public TrainResponse getSpecificTrain(@PathVariable String Id) {
-    return trainService.getSpecificTrain(Id);
-}
-
-
-
-
+    @GetMapping("/{Id}")
+    public TrainResponse getSpecificTrain(@PathVariable String Id) {
+        return trainService.getSpecificTrain(Id);
+    }
 
 }
