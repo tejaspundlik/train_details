@@ -54,6 +54,12 @@ public class TrainService {
         return mapToTrainResponse(train);
     }
 
+    @SuppressWarnings("null")
+    public void deleteTrain(String trainId) {
+        repository.deleteById(trainId);
+        log.info(trainId + " has been updated");
+    }
+
     public List<TrainResponse> getAllTrains() {
         List<TrainDetails> trains = repository.findAll();
         return trains.stream().map(this::mapToTrainResponse).toList();

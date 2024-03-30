@@ -49,4 +49,10 @@ public class TrainController {
         return trainService.getSpecificTrain(Id);
     }
 
+    @DeleteMapping("/{Id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteTrain(@PathVariable String Id) {
+        trainService.deleteTrain(Id);
+        return new String(Id + " has been deleted");
+    }
 }
