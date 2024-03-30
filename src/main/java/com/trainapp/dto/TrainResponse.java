@@ -10,14 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrainResponse {
-    private String trainNumber;
+    private String trainId;
     private String trainName;
     private String trainType;
     private String trainImage;
+    private int trainRoute;
+    private int trainFare;
     private int trainCapacity;
 
-    public String getTrainNumber() {
-        return this.trainNumber;
+    public String getTrainId() {
+        return this.trainId;
     }
 
     public String getTrainName() {
@@ -30,6 +32,14 @@ public class TrainResponse {
 
     public String getTrainImage() {
         return this.trainImage;
+    }
+
+    public int getTrainRoute() {
+        return this.trainRoute;
+    }
+
+    public int getTrainFare() {
+        return this.trainFare;
     }
 
     public int getTrainCapacity() {

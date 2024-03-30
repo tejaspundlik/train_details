@@ -19,22 +19,38 @@ public class TrainService {
 
     @SuppressWarnings("null")
     public void createTrain(TrainRequest train) {
-        TrainDetails train_save = TrainDetails.builder()
-                .trainNumber(train.getTrainNumber())
+        TrainDetails trainSave = TrainDetails.builder()
+                .trainId(train.getTrainId())
                 .trainName(train.getTrainName())
                 .trainType(train.getTrainType())
                 .trainImage(train.getTrainImage())
+                .trainRoute(train.getTrainRoute())
+                .trainFare(train.getTrainFare())
                 .trainCapacity(train.getTrainCapacity())
                 .build();
 
-        repository.save(train_save);
-        log.info("Train Details for: " + train_save.getTrainNumber() + " -> saved");
-
+        repository.save(trainSave);
+        log.info(trainSave.getTrainId() + " has been added");
     }
 
     @SuppressWarnings("null")
-    public TrainResponse getSpecificTrain(String trainNumber) {
-        TrainDetails train = repository.findById(trainNumber).get();
+    public void updateTrain(TrainRequest train) {
+        TrainDetails trainUpdate = TrainDetails.builder()
+                .trainId(train.getTrainId())
+                .trainName(train.getTrainName())
+                .trainType(train.getTrainType())
+                .trainImage(train.getTrainImage())
+                .trainRoute(train.getTrainRoute())
+                .trainFare(train.getTrainFare())
+                .trainCapacity(train.getTrainCapacity())
+                .build();
+        repository.save(trainUpdate);
+        log.info(trainUpdate.getTrainId() + " has been updated");
+    }
+
+    @SuppressWarnings("null")
+    public TrainResponse getSpecificTrain(String trainId) {
+        TrainDetails train = repository.findById(trainId).get();
         return mapToTrainResponse(train);
     }
 
@@ -46,10 +62,12 @@ public class TrainService {
 
     private TrainResponse mapToTrainResponse(TrainDetails train) {
         return TrainResponse.builder()
-                .trainNumber(train.getTrainNumber())
+                .trainId(train.getTrainId())
                 .trainName(train.getTrainName())
                 .trainType(train.getTrainType())
                 .trainImage(train.getTrainImage())
+                .trainRoute(train.getTrainRoute())
+                .trainFare(train.getTrainFare())
                 .trainCapacity(train.getTrainCapacity())
                 .build();
     }

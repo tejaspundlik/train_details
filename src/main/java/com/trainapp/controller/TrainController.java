@@ -13,8 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/train")
@@ -23,13 +26,19 @@ public class TrainController {
     @Autowired
     private TrainService trainService;
 
-    @PostMapping("/add_train")
+    @PostMapping("/addTrain")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createTrain(@RequestBody TrainRequest trainRequest) {
         trainService.createTrain(trainRequest);
     }
 
-    @GetMapping
+    @PutMapping("/updateTrain")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateTrain(@RequestBody TrainRequest trainRequest) {
+        trainService.updateTrain(trainRequest);
+    }
+
+    @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<TrainResponse> getAllTrains() {
         return trainService.getAllTrains();
