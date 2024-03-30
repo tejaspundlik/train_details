@@ -10,7 +10,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrainRequest {
+    private String trainNumber;
     private String trainName;
-    private String type;
-    private String urlImage;
+    private String trainType;
+    private String trainImage;
+    private int trainCapacity;
+
+    public String getTrainNumber() {
+        return this.trainNumber;
+    }
+
+    public String getTrainName() {
+        return this.trainName;
+    }
+
+    public String getTrainType() {
+        return this.trainType;
+    }
+
+    public String getTrainImage() {
+        return this.trainImage;
+    }
+
+    public int getTrainCapacity() {
+        return this.trainCapacity;
+    }
 }

@@ -20,18 +20,21 @@ public class TrainService {
     @SuppressWarnings("null")
     public void createTrain(TrainRequest train) {
         TrainDetails train_save = TrainDetails.builder()
-                .urlImage(train.getUrlImage())
-                .type(train.getType())
-                .trainName(train.getTrainName()).build();
+                .trainNumber(train.getTrainNumber())
+                .trainName(train.getTrainName())
+                .trainType(train.getTrainType())
+                .trainImage(train.getTrainImage())
+                .trainCapacity(train.getTrainCapacity())
+                .build();
 
         repository.save(train_save);
-        log.info("Train Details for: " + train_save.getId() + " -> saved");
+        log.info("Train Details for: " + train_save.getTrainNumber() + " -> saved");
 
     }
 
     @SuppressWarnings("null")
-    public TrainResponse getSpecificTrain(String id) {
-        TrainDetails train = repository.findById(id).get();
+    public TrainResponse getSpecificTrain(String trainNumber) {
+        TrainDetails train = repository.findById(trainNumber).get();
         return mapToTrainResponse(train);
     }
 
@@ -43,9 +46,11 @@ public class TrainService {
 
     private TrainResponse mapToTrainResponse(TrainDetails train) {
         return TrainResponse.builder()
-                .id(train.getId()).urlImage(train.getUrlImage())
-                .type(train.getType())
+                .trainNumber(train.getTrainNumber())
                 .trainName(train.getTrainName())
+                .trainType(train.getTrainType())
+                .trainImage(train.getTrainImage())
+                .trainCapacity(train.getTrainCapacity())
                 .build();
     }
 }

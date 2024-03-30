@@ -7,15 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(value="train_details")
+@Document(value = "train_details")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 public class TrainDetails {
-@Id
-private String id;
-private String trainName;
-private String type;
-private String urlImage;
+    @Id
+    private String trainNumber;
+    private String trainName;
+    private String trainType;
+    private String trainImage;
+    private int trainCapacity;
 }
